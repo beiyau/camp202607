@@ -105,19 +105,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:var(--nav);displa
 .photo-grid img:hover{transform:scale(1.03)}
 .no-content{text-align:center;padding:36px 20px;color:var(--hint);font-size:.88rem;background:var(--cream);border-radius:8px;border:1px dashed var(--card)}
 .diary-box{background:var(--cream);border-radius:8px;padding:18px;line-height:1.9;font-size:.9rem;color:var(--text);border:1px solid var(--card);white-space:pre-wrap}
+.blog-feed{display:flex;flex-direction:column;gap:20px}
+.blog-post{background:var(--cream);border-radius:10px;overflow:hidden;border:1px solid var(--card);position:relative}
+.blog-num{position:absolute;top:12px;left:12px;background:var(--nav);color:var(--gold);font-family:"Zen Kaku Gothic New",sans-serif;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:3px;z-index:1}
+.blog-photo{width:100%;max-height:320px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s}
+.blog-photo:hover{opacity:.9}
+.blog-diary{padding:16px 18px;line-height:1.85;font-size:.9rem;color:var(--text);white-space:pre-wrap}
 #contact{background:var(--nav);scroll-margin-top:56px}
 #contact .s-label{color:var(--gold);opacity:.7}
 #contact .s-title{color:rgba(255,255,255,.88);white-space:nowrap}
 .contact-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:28px;max-width:440px;margin:0 auto}
 .contact-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.06)}
 .contact-row:last-child{border-bottom:none}
-.contact-icon{font-size:1.5rem;flex-shrink:0;width:32px;text-align:center}
+.contact-icon{display:none}
 .ci-label{font-size:.68rem;color:rgba(255,255,255,.35);letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px}
 .ci-val{font-family:"Zen Kaku Gothic New",sans-serif;font-size:1.1rem;color:var(--gold);font-weight:700}
 .ci-sub{font-size:.76rem;color:rgba(255,255,255,.4);margin-top:2px}
 .cta-section{background:var(--bg2);padding:72px 24px;text-align:center;position:relative;overflow:hidden}
 .cta-section::before{content:'大冒險';font-family:"Zen Kaku Gothic New",sans-serif;font-size:18vw;color:rgba(61,59,55,.06);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;font-weight:700}
-.cta-title{font-family:"Zen Kaku Gothic New",sans-serif;font-size:clamp(1.6rem,6vw,2.8rem);color:var(--text);margin-bottom:10px;position:relative;font-weight:700}
+.cta-title{font-family:"Zen Kaku Gothic New",sans-serif;font-size:clamp(1.6rem,6vw,2.8rem);color:var(--text);margin-bottom:24px;position:relative;font-weight:700}
+.prep-list{list-style:none;margin:0 auto 32px;max-width:320px;text-align:left;display:flex;flex-direction:column;gap:10px}
+.prep-list li{background:rgba(61,59,55,.08);border-radius:6px;padding:10px 18px;font-size:.95rem;color:var(--text);position:relative;padding-left:32px;font-weight:500}
+.prep-list li::before{content:'·';position:absolute;left:14px;color:var(--accent);font-size:1.4rem;line-height:1;top:8px}
 .cta-sub{font-size:.92rem;color:var(--sub);margin-bottom:32px;position:relative;letter-spacing:.04em}
 .cta-btn{position:relative;display:inline-block;background:var(--nav);color:var(--gold);font-family:"Zen Kaku Gothic New",sans-serif;font-size:1.1rem;padding:15px 44px;border-radius:4px;border:none;cursor:pointer;letter-spacing:.08em;text-decoration:none;font-weight:700;transition:opacity .2s}
 .cta-btn:hover{opacity:.82}
@@ -211,7 +220,7 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
         <div class="tl-row"><div class="tl-time-col">11:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 食</span><strong>午餐：煮水餃！</strong><small>卡式爐 × IH爐 兩種爐具都會使用</small></div></div>
         <div class="tl-row"><div class="tl-time-col">12:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>開動！+ 午休</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">14:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🤖 育</span><strong>AI 大揭密！</strong><small>這張圖是真的嗎？AI 到底好不好？一起來玩問答！</small></div></div>
-        <div class="tl-row"><div class="tl-time-col">16:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 食</span><strong>咖哩飯大作戰！備料開始</strong><small>洗菜 → 切菜 → 量米 → 兩人各煮一次飯</small></div></div>
+        <div class="tl-row"><div class="tl-time-col">16:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 食</span><strong>咖哩飯大作戰！備料開始</strong><small>洗菜 → 切菜 → 煮飯</small></div></div>
         <div class="tl-row"><div class="tl-time-col">17:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><strong>燉煮咖哩</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">18:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>開動！→ 洗碗、清潔廚房</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">20:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">👕 衣</span><strong>洗衣達人訓練</strong><small>分辨深淺色 · 正確投放洗劑 · 手洗 · 晾曬</small></div></div>
@@ -221,14 +230,11 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
 
     <!-- DAY 3 -->
     <div class="day-content" id="day2">
-      <div class="day-header"><div class="day-badge" style="background:rgba(122,148,112,.15)">🏛️</div><div><div class="day-subtitle">生活收成日</div><div class="day-sub-desc">校外教學 × 頒獎典禮 × 快樂回家</div></div></div>
+      <div class="day-header"><div class="day-badge" style="background:rgba(122,148,112,.15)">🏛️</div><div><div class="day-subtitle">生活收成日</div><div class="day-sub-desc">校外教學 × 快樂回家</div></div></div>
       <div class="tl">
         <div class="tl-row"><div class="tl-time-col">08:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>起床、盥洗</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">08:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>早餐</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">09:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🏛️ 行</span><strong>校外教學｜古埃及文物展</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">12:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>午餐</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">13:00</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.15)"></div></div><div class="tl-body"><strong>午休</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">14:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>打掃環境、收拾行李、大合照</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">16:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><strong>快樂回家！</strong></div></div>
       </div>
     </div>
@@ -256,18 +262,24 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
     <h2 class="s-title">有任何問題都可以找我們</h2>
   </div>
   <div class="contact-card">
-    <div class="contact-row"><div class="contact-icon">📍</div><div><div class="ci-label">地點</div><div class="ci-val">永榮三街 83 號</div></div></div>
-    <div class="contact-row"><div class="contact-icon">📱</div><div><div class="ci-label">聯絡電話</div><div class="ci-val">0987-923-907</div><div class="ci-sub">珼蘨老師</div></div></div>
-    <div class="contact-row"><div class="contact-icon">👥</div><div><div class="ci-label">招生人數</div><div class="ci-val">3 – 4 人</div></div></div>
-    <div class="contact-row"><div class="contact-icon">🚗</div><div><div class="ci-label">住宿說明</div><div class="ci-val">三天兩夜</div><div class="ci-sub">不住宿者每日自行接送</div></div></div>
-    <div class="contact-row"><div class="contact-icon">🤝</div><div><div class="ci-label">協辦人員</div><div class="ci-val">吱吱</div></div></div>
+    <div class="contact-row"><div><div class="ci-label">地點</div><div class="ci-val">永榮三街 83 號</div></div></div>
+    <div class="contact-row"><div><div class="ci-label">招生人數</div><div class="ci-val">3 – 4 人</div></div></div>
+    <div class="contact-row"><div><div class="ci-label">住宿說明</div><div class="ci-val">三天兩夜</div><div class="ci-sub">不住宿者每日自行接送</div></div></div>
+    <div class="contact-row"><div><div class="ci-label">協辦人員</div><div class="ci-val">吱吱</div></div></div>
+    <div class="contact-row"><div><div class="ci-label">聯絡方式</div><div class="ci-val"><a href="https://line.me/ti/p/l3cDsDxqig" target="_blank" style="color:var(--gold);text-decoration:none;letter-spacing:.04em">LINE 聯絡 →</a></div></div></div>
   </div>
 </section>
 
 <section class="cta-section">
-  <h2 class="cta-title">名額有限，手腳要快</h2>
-  <p class="cta-sub">讓孩子在玩樂中，悄悄長大</p>
-  <a class="cta-btn" href="tel:0987923907">立即報名</a>
+  <h2 class="cta-title">學員需準備物品</h2>
+  <ul class="prep-list">
+    <li>平板或筆電</li>
+    <li>文具</li>
+    <li>水壺</li>
+    <li>樂扣 ×2（如需外帶咖哩＆白飯）</li>
+    <li>換洗衣物 ×2天（住宿者）</li>
+  </ul>
+  <a class="cta-btn" href="https://line.me/ti/p/l3cDsDxqig" target="_blank">LINE 報名</a>
 </section>
 
 <footer>© 2026 生活大冒險夏令營 &nbsp;·&nbsp; 食衣住行育樂，全都學</footer>
@@ -360,15 +372,35 @@ function openPage(name, data) {
 function closePage() { document.getElementById('studentPage').classList.remove('open'); }
 
 function renderDayContent() {
-  const records = (pageData && pageData['day'+currentDay]) || [];
-  const photos = records.map(r => r.photo).filter(p => p && p.length > 0);
-  const diaries = records.map(r => r.diary).filter(Boolean);
+  const dayKey = 'day' + currentDay;
+  const records = (pageData && pageData[dayKey]) || [];
   const dayNames = ['','第一天','第二天','第三天'];
   const tabs = [1,2,3].map(d => `<button class="sp-day-tab${d===currentDay?' active':''}" onclick="spSwitch(${d})">${dayNames[d]}</button>`).join('');
-  const photosHtml = photos.length ? `<div class="photo-grid">${photos.map(u=>`<img src="${u}" onclick="openLightbox('${u}')" onerror="this.style.display='none'">`).join('')}</div>` : `<div class="no-content">這天還沒有上傳照片</div>`;
-  const latestDiary = diaries.filter(Boolean).pop() || '';
-  const diaryHtml = latestDiary ? `<div class="diary-box">${latestDiary.replace(/</g,'&lt;')}</div>` : `<div class="no-content">這天還沒有寫心得</div>`;
-  document.getElementById('spBody').innerHTML = `<div class="sp-day-tabs">${tabs}</div><div class="sp-section-title">照片</div>${photosHtml}<div class="sp-section-title">心得</div>${diaryHtml}`;
+
+  let postsHtml = '';
+  if (records.length === 0) {
+    postsHtml = '<div class="no-content">這天還沒有任何記錄</div>';
+  } else {
+    postsHtml = records.map((r, i) => {
+      const photoHtml = (r.photo && r.photo.length > 0)
+        ? `<img class="blog-photo" src="${r.photo}" onclick="openLightbox('${r.photo}')" onerror="this.style.display='none'">`
+        : '';
+      const diaryHtml = (r.diary && r.diary.trim())
+        ? `<div class="blog-diary">${r.diary.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div>`
+        : '';
+      if (!photoHtml && !diaryHtml) return '';
+      return `<div class="blog-post">
+        <div class="blog-num">#${i + 1}</div>
+        ${photoHtml}
+        ${diaryHtml}
+      </div>`;
+    }).filter(Boolean).join('');
+  }
+
+  document.getElementById('spBody').innerHTML = `
+    <div class="sp-day-tabs">${tabs}</div>
+    <div class="blog-feed">${postsHtml}</div>
+  `;
 }
 
 function spSwitch(d) { currentDay = d; renderDayContent(); }
