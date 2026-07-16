@@ -27,33 +27,28 @@ select:focus,textarea:focus{border-color:var(--accent)}
 .day-pills{display:flex;gap:6px}
 .day-pill{flex:1;padding:9px 0;border:1.5px solid var(--card);border-radius:4px;background:#fff;font-family:"Noto Sans TC",sans-serif;font-weight:700;font-size:.82rem;color:var(--hint);cursor:pointer;text-align:center;transition:all .2s}
 .day-pill.active{border-color:var(--accent);color:var(--accent);background:var(--cream)}
-textarea{min-height:110px;resize:vertical;line-height:1.7}
-
-/* 照片上傳區 */
-.photo-upload-zone{
-  border:2px dashed var(--card);border-radius:8px;
-  padding:28px 20px;text-align:center;cursor:pointer;
-  transition:all .2s;background:#fff;position:relative;
-  margin-bottom:10px;
-}
+textarea{min-height:120px;resize:vertical;line-height:1.8}
+.photo-upload-zone{border:2px dashed var(--card);border-radius:8px;padding:28px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#fff;position:relative;margin-bottom:10px}
 .photo-upload-zone:hover{border-color:var(--accent);background:var(--bg)}
 .photo-upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
 .puz-icon{font-size:2rem;display:block;margin-bottom:8px}
 .puz-text{font-size:.88rem;color:var(--sub);line-height:1.6}
-.puz-hint{font-size:.75rem;color:var(--hint);margin-top:4px}
+.puz-hint{font-size:.72rem;color:var(--hint);margin-top:4px}
 .photo-preview-wrap{display:none;margin-bottom:10px}
-.photo-preview-wrap img{width:100%;max-height:280px;object-fit:cover;border-radius:8px;display:block}
-.photo-change-btn{display:block;text-align:center;font-size:.78rem;color:var(--accent);margin-top:6px;cursor:pointer;font-weight:700}
-.compress-info{font-size:.72rem;color:var(--hint);text-align:center;margin-top:4px}
-
+.photo-preview-wrap img{width:100%;max-height:260px;object-fit:cover;border-radius:8px;display:block}
+.photo-change-btn{display:block;text-align:center;font-size:.78rem;color:var(--accent);margin-top:6px;cursor:pointer;font-weight:700;padding:4px}
+.compress-info{font-size:.72rem;color:var(--hint);text-align:center;margin-top:3px}
+.optional-tag{font-size:.68rem;color:var(--hint);font-weight:400;letter-spacing:.04em;margin-left:4px;text-transform:none}
 .submit-btn{width:100%;padding:14px;background:var(--nav);color:var(--gold);border:none;border-radius:6px;font-family:"Zen Kaku Gothic New",sans-serif;font-size:1rem;cursor:pointer;transition:opacity .2s;margin-top:4px;font-weight:700;letter-spacing:.06em}
 .submit-btn:hover{opacity:.82}
 .submit-btn:disabled{opacity:.4;cursor:not-allowed}
-.progress-bar{width:0%;height:4px;background:var(--accent);border-radius:2px;transition:width .3s;margin-top:10px}
-.progress-wrap{background:var(--card);border-radius:2px;overflow:hidden;display:none;margin-top:10px}
+.progress-wrap{background:var(--card);border-radius:2px;overflow:hidden;display:none;margin-top:10px;height:4px}
+.progress-bar{width:0%;height:4px;background:var(--accent);border-radius:2px;transition:width .4s}
 .msg{text-align:center;padding:12px;border-radius:6px;font-weight:700;margin-top:14px;display:none;font-size:.88rem}
 .msg.ok{background:#e8f5e2;color:#3a6b2a;border:1px solid #c2e0b4}
 .msg.err{background:#fae8e8;color:#7a2a2a;border:1px solid #e0b4b4}
+.tip{background:var(--bg2);border-radius:6px;padding:10px 14px;font-size:.78rem;color:var(--sub);line-height:1.6;margin-bottom:14px}
+.tip strong{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -67,14 +62,17 @@ textarea{min-height:110px;resize:vertical;line-height:1.7}
 </header>
 
 <div class="container">
+
+  <div class="tip">💡 每次上傳是<strong>一篇心得</strong>，可以有一張照片配上文字。一天可以傳好幾篇，會像網誌一樣排列！</div>
+
   <div class="card">
     <label>我是誰？</label>
     <select id="sel-name">
       <option value="">— 選擇你的名字 —</option>
       <option value="小恩">🐯 小恩</option>
-      <option value="莎莎">🐰 莎莎</option>
+      <option value="紗紗">🐰 紗紗</option>
       <option value="一樂">🐻 一樂</option>
-      <option value="候補">🦊 候補</option>
+      <option value="阿暢">🦊 阿暢</option>
     </select>
   </div>
 
@@ -88,26 +86,26 @@ textarea{min-height:110px;resize:vertical;line-height:1.7}
   </div>
 
   <div class="card">
-    <label>📸 今天的照片（選一張）</label>
+    <label>📸 照片 <span class="optional-tag">（選填，一篇一張）</span></label>
     <div class="photo-preview-wrap" id="previewWrap">
       <img id="previewImg" src="" alt="預覽">
-      <span class="photo-change-btn" onclick="changePhoto()">重新選擇照片</span>
+      <span class="photo-change-btn" onclick="changePhoto()">🔄 重新選擇</span>
       <div class="compress-info" id="compressInfo"></div>
     </div>
     <div class="photo-upload-zone" id="uploadZone">
       <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this)">
       <span class="puz-icon">📷</span>
       <div class="puz-text">點擊選擇照片<br>或直接拖曳到這裡</div>
-      <div class="puz-hint">支援 JPG、PNG、HEIC，自動壓縮</div>
+      <div class="puz-hint">支援 JPG、PNG，自動壓縮不佔空間</div>
     </div>
   </div>
 
   <div class="card">
-    <label>📝 今天的心得</label>
-    <textarea id="inp-diary" placeholder="寫下今天學到什麼、最開心的事、最有挑戰的事…"></textarea>
+    <label>📝 心得 <span class="optional-tag">（選填）</span></label>
+    <textarea id="inp-diary" placeholder="寫下這個片段的感受、學到什麼、最開心的事…&#10;&#10;可以只上傳照片，或只寫文字，或兩個都有！"></textarea>
   </div>
 
-  <button class="submit-btn" id="submit-btn" onclick="submitForm()">送出</button>
+  <button class="submit-btn" id="submit-btn" onclick="submitForm()">送出這篇</button>
   <div class="progress-wrap" id="progressWrap">
     <div class="progress-bar" id="progressBar"></div>
   </div>
@@ -128,12 +126,12 @@ function pickDay(btn) {
 function handleFile(input) {
   const file = input.files[0];
   if (!file) return;
-  compressImage(file, 800, 0.7, function(base64, sizeKB) {
+  compressImage(file, 900, 0.75, function(base64, sizeKB) {
     compressedBase64 = base64;
     document.getElementById('previewImg').src = base64;
     document.getElementById('previewWrap').style.display = 'block';
     document.getElementById('uploadZone').style.display = 'none';
-    document.getElementById('compressInfo').textContent = '圖片大小：約 ' + sizeKB + ' KB';
+    document.getElementById('compressInfo').textContent = '圖片壓縮後約 ' + sizeKB + ' KB';
   });
 }
 
@@ -151,10 +149,9 @@ function compressImage(file, maxWidth, quality, callback) {
     img.onload = function() {
       const canvas = document.createElement('canvas');
       let w = img.width, h = img.height;
-      if (w > maxWidth) { h = h * maxWidth / w; w = maxWidth; }
+      if (w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
       canvas.width = w; canvas.height = h;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(img, 0, 0, w, h);
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
       const base64 = canvas.toDataURL('image/jpeg', quality);
       const sizeKB = Math.round(base64.length * 0.75 / 1024);
       callback(base64, sizeKB);
@@ -177,28 +174,20 @@ async function submitForm() {
   btn.disabled = true;
   btn.textContent = '上傳中…';
   progressWrap.style.display = 'block';
-  progressBar.style.width = '30%';
+  progressBar.style.width = '40%';
 
   try {
-    const response = await fetch(SCRIPT_URL, {
+    await fetch(SCRIPT_URL, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name,
-        day: selectedDay,
-        photo: compressedBase64,
-        diary: diary
-      })
+      body: JSON.stringify({ name, day: selectedDay, photo: compressedBase64, diary })
     });
 
     progressBar.style.width = '100%';
-    setTimeout(() => {
-      progressWrap.style.display = 'none';
-      progressBar.style.width = '0%';
-    }, 600);
+    setTimeout(() => { progressWrap.style.display = 'none'; progressBar.style.width = '0%'; }, 600);
 
-    showMsg('🎉 送出成功！照片和心得已經儲存了！', true);
+    showMsg('🎉 送出成功！這篇心得已儲存！', true);
     changePhoto();
     document.getElementById('inp-diary').value = '';
 
@@ -208,7 +197,7 @@ async function submitForm() {
   }
 
   btn.disabled = false;
-  btn.textContent = '送出';
+  btn.textContent = '送出這篇';
 }
 
 function showMsg(text, ok) {
