@@ -106,6 +106,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:var(--nav);displa
 .no-content{text-align:center;padding:36px 20px;color:var(--hint);font-size:.88rem;background:var(--cream);border-radius:8px;border:1px dashed var(--card)}
 .diary-box{background:var(--cream);border-radius:8px;padding:18px;line-height:1.9;font-size:.9rem;color:var(--text);border:1px solid var(--card);white-space:pre-wrap}
 .blog-feed{display:flex;flex-direction:column;gap:20px}
+.blog-photo-wrap{width:100%;min-height:40px}
+.blog-loading{text-align:center;padding:20px;color:var(--hint);font-size:.82rem}
 .blog-post{background:var(--cream);border-radius:10px;overflow:hidden;border:1px solid var(--card);position:relative}
 .blog-num{position:absolute;top:12px;left:12px;background:var(--nav);color:var(--gold);font-family:"Zen Kaku Gothic New",sans-serif;font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:3px;z-index:1}
 .blog-photo{width:100%;max-height:320px;object-fit:cover;display:block;cursor:pointer;transition:opacity .2s}
@@ -376,31 +378,60 @@ function renderDayContent() {
   const dayNames = ['','第一天','第二天','第三天'];
   const tabs = [1,2,3].map(d => `<button class="sp-day-tab${d===currentDay?' active':''}" onclick="spSwitch(${d})">${dayNames[d]}</button>`).join('');
 
-  let postsHtml = '';
   if (records.length === 0) {
-    postsHtml = '<div class="no-content">這天還沒有任何記錄</div>';
-  } else {
-    postsHtml = records.map((r, i) => {
-      const photoHtml = (r.photo && r.photo.length > 0)
-        ? `<img class="blog-photo" src="${r.photo}" onclick="openLightbox('${r.photo}')" onerror="this.style.display='none'">`
-        : '';
-      const diaryHtml = (r.diary && r.diary.trim())
-        ? `<div class="blog-diary">${r.diary.replace(/</g,'&lt;').replace(/\n/g,'<br>')}</div>`
-        : '';
-      if (!photoHtml && !diaryHtml) return '';
-      return `<div class="blog-post">
-        <div class="blog-num">#${i + 1}</div>
-        ${photoHtml}
-        ${diaryHtml}
-      </div>`;
-    }).filter(Boolean).join('');
+    document.getElementById('spBody').innerHTML = `<div class="sp-day-tabs">${tabs}</div><div class="no-content">這天還沒有任何記錄</div>`;
+    return;
   }
 
-  document.getElementById('spBody').innerHTML = `
-    <div class="sp-day-tabs">${tabs}</div>
-    <div class="blog-feed">${postsHtml}</div>
-  `;
+  // 先建立骨架，照片之後逐一載入
+  const postsHtml = records.map((r, i) => `
+    <div class="blog-post" id="post_${i}">
+      <div class="blog-num">#${i + 1}</div>
+      <div class="blog-photo-wrap" id="photo_wrap_${i}">
+        <div class="blog-loading">圖片載入中…</div>
+      </div>
+      ${r.diary && r.diary.toString().trim() ? `<div class="blog-diary">${r.diary.toString().replace(/</g,'&lt;').replace(/
+/g,'<br>')}</div>` : ''}
+    </div>
+  `).join('');
+
+  document.getElementById('spBody').innerHTML = `<div class="sp-day-tabs">${tabs}</div><div class="blog-feed">${postsHtml}</div>`;
+
+  // 逐一抓照片
+  records.forEach((r, i) => {
+    if (!r.rowId) {
+      document.getElementById('photo_wrap_' + i).style.display = 'none';
+      return;
+    }
+    fetchPhoto(r.rowId, function(photoData) {
+      const wrap = document.getElementById('photo_wrap_' + i);
+      if (!wrap) return;
+      if (photoData && photoData.length > 0) {
+        wrap.innerHTML = `<img class="blog-photo" src="${photoData}" onclick="openLightbox('${photoData}')">`;
+      } else {
+        wrap.style.display = 'none';
+      }
+    });
+  });
 }
+
+function fetchPhoto(rowId, callback) {
+  const cbName = 'photo_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+  const script = document.createElement('script');
+  window[cbName] = function(data) {
+    delete window[cbName];
+    document.body.removeChild(script);
+    callback(data && data.photo ? data.photo : '');
+  };
+  script.src = SCRIPT_URL + '?photoId=' + encodeURIComponent(rowId) + '&callback=' + cbName;
+  script.onerror = function() {
+    delete window[cbName];
+    document.body.removeChild(script);
+    callback('');
+  };
+  document.body.appendChild(script);
+}
+
 
 function spSwitch(d) { currentDay = d; renderDayContent(); }
 function openLightbox(url) { document.getElementById('lightboxImg').src=url; document.getElementById('lightbox').classList.add('open'); }
