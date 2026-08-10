@@ -126,7 +126,7 @@ function pickDay(btn) {
 function handleFile(input) {
   const file = input.files[0];
   if (!file) return;
-  compressImage(file, 900, 0.75, function(base64, sizeKB) {
+  compressImage(file, 600, 0.6, function(base64, sizeKB) {
     compressedBase64 = base64;
     document.getElementById('previewImg').src = base64;
     document.getElementById('previewWrap').style.display = 'block';
