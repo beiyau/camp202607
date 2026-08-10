@@ -373,12 +373,13 @@ function openPage(name, data) {
 function closePage() { document.getElementById('studentPage').classList.remove('open'); }
 
 function renderDayContent() {
-  const dayKey = 'day' + currentDay;
-  const records = (pageData && pageData[dayKey]) || [];
-  const dayNames = ['','第一天','第二天','第三天'];
-  const tabs = [1,2,3].map(function(d) {
-    return '<button class="sp-day-tab' + (d===currentDay?' active':'') + '" onclick="spSwitch(' + d + ')">' + dayNames[d] + '</button>';
-  }).join('');
+  var dayKey = 'day' + currentDay;
+  var records = (pageData && pageData[dayKey]) || [];
+  var dayNames = ['','第一天','第二天','第三天'];
+  var tabs = '';
+  for (var d = 1; d <= 3; d++) {
+    tabs += '<button class="sp-day-tab' + (d===currentDay?' active':'') + '" onclick="spSwitch(' + d + ')">' + dayNames[d] + '</button>';
+  }
 
   if (records.length === 0) {
     document.getElementById('spBody').innerHTML = '<div class="sp-day-tabs">' + tabs + '</div><div class="no-content">這天還沒有任何記錄</div>';
@@ -388,11 +389,12 @@ function renderDayContent() {
   var postsHtml = '';
   for (var i = 0; i < records.length; i++) {
     var r = records[i];
-    var diary = (r.diary && r.diary.toString().trim()) ? r.diary.toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>') : '';
+    var diaryText = (r.diary !== undefined && r.diary !== null) ? String(r.diary) : '';
+    var diaryHtml = diaryText.trim() ? '<div class="blog-diary">' + diaryText + '</div>' : '';
     postsHtml += '<div class="blog-post" id="post_' + i + '">';
     postsHtml += '<div class="blog-num">#' + (i+1) + '</div>';
-    postsHtml += '<div class="blog-photo-wrap" id="photo_wrap_' + i + '"><div class="blog-loading">圖片載入中…</div></div>';
-    if (diary) postsHtml += '<div class="blog-diary">' + diary + '</div>';
+    postsHtml += '<div class="blog-photo-wrap" id="photo_wrap_' + i + '"><div class="blog-loading">圖片載入中</div></div>';
+    postsHtml += diaryHtml;
     postsHtml += '</div>';
   }
 
