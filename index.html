@@ -332,22 +332,22 @@ function openStudent(name) {
 function closeModal() { document.getElementById('pwModal').classList.remove('open'); }
 
 function callScript(params, callback) {
-  const cbName = 'cb_' + Date.now();
-  const script = document.createElement('script');
-  window[cbName] = function(data) {
-    delete window[cbName];
-    document.body.removeChild(script);
-    callback(data);
-  };
   const qs = Object.entries(params).map(([k,v]) => k+'='+encodeURIComponent(v)).join('&');
-  script.src = SCRIPT_URL + '?' + qs + '&callback=' + cbName;
-  script.onerror = function() {
-    delete window[cbName];
-    document.body.removeChild(script);
-    callback(null);
-  };
-  document.body.appendChild(script);
+  const url = SCRIPT_URL + '?' + qs;
+  fetch(url, { redirect: 'follow' })
+    .then(r => r.json())
+    .then(data => callback(data))
+    .catch(() => {
+      // fallback: script tag
+      const cbName = 'cb_' + Date.now();
+      const script = document.createElement('script');
+      window[cbName] = function(data) { delete window[cbName]; document.body.removeChild(script); callback(data); };
+      script.src = url + '&callback=' + cbName;
+      script.onerror = function() { delete window[cbName]; document.body.removeChild(script); callback(null); };
+      document.body.appendChild(script);
+    });
 }
+
 
 function checkPw() {
   const input = document.getElementById('pwInput').value.trim();
@@ -416,20 +416,18 @@ function renderDayContent() {
 }
 
 function fetchPhoto(rowId, callback) {
-  const cbName = 'photo_cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
-  const script = document.createElement('script');
-  window[cbName] = function(data) {
-    delete window[cbName];
-    document.body.removeChild(script);
-    callback(data && data.photo ? data.photo : '');
-  };
-  script.src = SCRIPT_URL + '?photoId=' + encodeURIComponent(rowId) + '&callback=' + cbName;
-  script.onerror = function() {
-    delete window[cbName];
-    document.body.removeChild(script);
-    callback('');
-  };
-  document.body.appendChild(script);
+  const url = SCRIPT_URL + '?photoId=' + encodeURIComponent(rowId);
+  fetch(url, { redirect: 'follow' })
+    .then(r => r.json())
+    .then(data => callback(data && data.photo ? data.photo : ''))
+    .catch(() => {
+      const cbName = 'photo_cb_' + Date.now();
+      const script = document.createElement('script');
+      window[cbName] = function(data) { delete window[cbName]; document.body.removeChild(script); callback(data && data.photo ? data.photo : ''); };
+      script.src = url + '&callback=' + cbName;
+      script.onerror = function() { delete window[cbName]; document.body.removeChild(script); callback(''); };
+      document.body.appendChild(script);
+    });
 }
 
 
