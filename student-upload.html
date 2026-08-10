@@ -62,8 +62,7 @@ textarea{min-height:120px;resize:vertical;line-height:1.8}
 </header>
 
 <div class="container">
-
-  <div class="tip">💡 每次上傳是<strong>一篇心得</strong>，可以有一張照片配上文字。一天可以傳好幾篇，會像網誌一樣排列！</div>
+  <div class="tip">💡 每次上傳是<strong>一篇心得</strong>，可以有一張照片配上文字。一天可以傳好幾篇！</div>
 
   <div class="card">
     <label>我是誰？</label>
@@ -96,13 +95,13 @@ textarea{min-height:120px;resize:vertical;line-height:1.8}
       <input type="file" id="fileInput" accept="image/*" onchange="handleFile(this)">
       <span class="puz-icon">📷</span>
       <div class="puz-text">點擊選擇照片<br>或直接拖曳到這裡</div>
-      <div class="puz-hint">支援 JPG、PNG，自動壓縮不佔空間</div>
+      <div class="puz-hint">支援 JPG、PNG，自動壓縮</div>
     </div>
   </div>
 
   <div class="card">
     <label>📝 心得 <span class="optional-tag">（選填）</span></label>
-    <textarea id="inp-diary" placeholder="寫下這個片段的感受、學到什麼、最開心的事…&#10;&#10;可以只上傳照片，或只寫文字，或兩個都有！"></textarea>
+    <textarea id="inp-diary" placeholder="寫下這個片段的感受、學到什麼、最開心的事…"></textarea>
   </div>
 
   <button class="submit-btn" id="submit-btn" onclick="submitForm()">送出這篇</button>
@@ -126,7 +125,7 @@ function pickDay(btn) {
 function handleFile(input) {
   const file = input.files[0];
   if (!file) return;
-  compressImage(file, 600, 0.6, function(base64, sizeKB) {
+  compressImage(file, 600, 0.65, function(base64, sizeKB) {
     compressedBase64 = base64;
     document.getElementById('previewImg').src = base64;
     document.getElementById('previewWrap').style.display = 'block';
@@ -186,7 +185,6 @@ async function submitForm() {
 
     progressBar.style.width = '100%';
     setTimeout(() => { progressWrap.style.display = 'none'; progressBar.style.width = '0%'; }, 600);
-
     showMsg('🎉 送出成功！這篇心得已儲存！', true);
     changePhoto();
     document.getElementById('inp-diary').value = '';

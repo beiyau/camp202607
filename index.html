@@ -330,21 +330,21 @@ function openStudent(name) {
 function closeModal() { document.getElementById('pwModal').classList.remove('open'); }
 
 function callScript(params, callback) {
-  // 先用 fetch 試，若 CORS 失敗改用 JSONP
+  const cbName = 'cb_' + Date.now();
+  const script = document.createElement('script');
+  window[cbName] = function(data) {
+    delete window[cbName];
+    document.body.removeChild(script);
+    callback(data);
+  };
   const qs = Object.entries(params).map(([k,v]) => k+'='+encodeURIComponent(v)).join('&');
-  const url = SCRIPT_URL + '?' + qs;
-  fetch(url)
-    .then(r => r.json())
-    .then(data => callback(data))
-    .catch(() => {
-      // fallback: JSONP
-      const cbName = 'cb_' + Date.now();
-      const script = document.createElement('script');
-      window[cbName] = function(data) { delete window[cbName]; document.body.removeChild(script); callback(data); };
-      script.src = url + '&callback=' + cbName;
-      script.onerror = function() { delete window[cbName]; document.body.removeChild(script); callback(null); };
-      document.body.appendChild(script);
-    });
+  script.src = SCRIPT_URL + '?' + qs + '&callback=' + cbName;
+  script.onerror = function() {
+    delete window[cbName];
+    document.body.removeChild(script);
+    callback(null);
+  };
+  document.body.appendChild(script);
 }
 
 function checkPw() {
