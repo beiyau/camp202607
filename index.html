@@ -141,6 +141,26 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
 @keyframes slideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bounce{0%,100%{transform:rotate(45deg) translate(0,0)}50%{transform:rotate(45deg) translate(3px,3px)}}
 @media(max-width:480px){.nav-links{gap:3px}.nav-btn{padding:5px 8px;font-size:.72rem}.activity-grid{grid-template-columns:repeat(2,1fr)}.students-grid{grid-template-columns:1fr 1fr}}
+
+.pn-card{background:#fff;border:1px solid var(--card);border-radius:10px;padding:22px 20px;margin-bottom:16px}
+.pn-title{font-family:"Zen Kaku Gothic New",sans-serif;font-size:1rem;font-weight:700;color:var(--nav);margin-bottom:12px;padding-bottom:8px;border-bottom:1.5px solid var(--bg2)}
+.pn-text{font-size:.88rem;color:var(--sub);line-height:1.9}
+.pn-note{font-size:.8rem;color:var(--warm);margin-top:12px;padding:8px 12px;background:#fff8f6;border-radius:6px;border-left:3px solid var(--warm)}
+.meal-table{width:100%;border-collapse:collapse;font-size:.82rem}
+.meal-table th{background:var(--nav);color:rgba(255,255,255,.8);padding:8px 10px;text-align:center;font-weight:700;font-size:.75rem;letter-spacing:.06em}
+.meal-table td{padding:10px;border-bottom:1px solid var(--bg2);color:var(--text);vertical-align:top;line-height:1.6}
+.meal-table tr:last-child td{border-bottom:none}
+.meal-table .day-col{font-weight:700;color:var(--accent);white-space:nowrap;width:60px}
+.meal-note{display:block;font-size:.72rem;color:var(--hint);margin-top:2px}
+.checklist{display:flex;flex-direction:column;gap:10px}
+.check-item{display:flex;align-items:center;gap:12px;cursor:pointer;padding:10px 12px;border-radius:6px;border:1.5px solid var(--card);background:var(--bg);transition:all .2s}
+.check-item:hover{border-color:var(--accent)}
+.check-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.check-item span{font-size:.88rem;color:var(--text);line-height:1.4}
+.check-item:has(input:checked){background:#f0f7f0;border-color:var(--accent)}
+.check-item:has(input:checked) span{color:var(--accent);text-decoration:line-through;opacity:.7}
+.check-reset{text-align:center;font-size:.75rem;color:var(--hint);margin-top:12px;cursor:pointer;padding:6px;transition:color .2s}
+.check-reset:hover{color:var(--warm)}
 </style>
 </head>
 <body>
@@ -151,7 +171,7 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
     <a class="nav-btn" href="#activity">活動內容</a>
     <a class="nav-btn" href="#schedule">行程表</a>
     <a class="nav-btn special" href="#students">學員專區</a>
-    <a class="nav-btn" href="#contact">聯絡資訊</a>
+    <a class="nav-btn" href="parents.html" target="_blank">家長須知</a><a class="nav-btn" href="#contact">聯絡資訊</a>
   </div>
 </nav>
 
@@ -189,55 +209,47 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
     <span class="s-label">完整行程</span>
     <h2 class="s-title">行程表 8/17–8/19</h2>
     <div class="day-switcher">
-      <button class="ds-btn active" onclick="switchDay(0)">第一天</button>
-      <button class="ds-btn" onclick="switchDay(1)">第二天</button>
-      <button class="ds-btn" onclick="switchDay(2)">第三天</button>
+      <button class="ds-btn active" onclick="switchDay(0)">8/17 第一天</button>
+      <button class="ds-btn" onclick="switchDay(1)">8/18 第二天</button>
+      <button class="ds-btn" onclick="switchDay(2)">8/19 第三天</button>
     </div>
 
     <!-- DAY 1 -->
     <div class="day-content active" id="day0">
-      <div class="day-header"><div class="day-badge" style="background:rgba(200,184,122,.15)">🌅</div><div><div class="day-subtitle">認識與探索</div><div class="day-sub-desc">我的餐盤設計 × 花市插花體驗</div></div></div>
+      <div class="day-header"><div class="day-badge" style="background:rgba(184,92,56,.15)">🏛️</div><div><div class="day-subtitle">探索日</div><div class="day-sub-desc">古埃及文物展 × 羽毛球</div></div></div>
       <div class="tl">
-        <div class="tl-row"><div class="tl-time-col">08:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>報到、認識新朋友、分組</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">08:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>三天行程大公開</strong><small>介紹整體流程</small></div></div>
-        <div class="tl-row"><div class="tl-time-col">09:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 育</span><strong>我的餐盤</strong><small>自己設計一日三餐</small></div></div>
-        <div class="tl-row"><div class="tl-time-col">11:00</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.15)"></div></div><div class="tl-body"><strong>休息</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">11:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>午餐 + 午休</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">14:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🚗 行</span><strong>開車出發！前往花市採購</strong><small>認識花材 · 自主挑選 · 付款體驗</small></div></div>
-        <div class="tl-row"><div class="tl-time-col">15:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">🌸 樂</span><strong>回營！插花體驗</strong><small>完成作品帶回家</small></div></div>
-        <div class="tl-row"><div class="tl-time-col">16:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>運動時間</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">17:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>晚餐</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">18:30</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.15)"></div></div><div class="tl-body"><strong>洗澡、整理</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">21:00</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.1)"></div></div><div class="tl-body"><strong>就寢</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">09:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🏛️ 行</span><strong>校外教學｜古埃及文物展</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">18:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>晚餐</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">21:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>羽毛球</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">23:00</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.1)"></div></div><div class="tl-body"><strong>就寢</strong></div></div>
       </div>
     </div>
-
-    <!-- DAY 2 -->
     <div class="day-content" id="day1">
-      <div class="day-header"><div class="day-badge" style="background:rgba(122,148,112,.15)">🍳</div><div><div class="day-subtitle">廚房挑戰日</div><div class="day-sub-desc">菜市場採購 × 水餃 × 咖哩飯大作戰</div></div></div>
+      <div class="day-header"><div class="day-badge" style="background:#D6F0FF">🛒</div><div><div class="day-subtitle">認識與探索</div><div class="day-sub-desc">菜市場 × 洗衣 × 奇美博物館 × 花市</div></div></div>
+      <div class="tl">
+        <div class="tl-row"><div class="tl-time-col">08:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--sky)"></div></div><div class="tl-body"><strong>起床、盥洗</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">08:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>早餐</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">09:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🚶 行</span><strong>出發！菜市場 ＆ 全聯採購</strong><small>採買咖哩食材 + 現成水餃</small></div></div>
+        <div class="tl-row"><div class="tl-time-col">11:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">👕 衣</span><strong>洗衣達人訓練</strong><small>分辨深淺色 · 正確投放洗劑 · 手洗 · 晾曬</small></div></div>
+        <div class="tl-row"><div class="tl-time-col">11:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>午餐 + 午休</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">14:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🏛️ 行</span><strong>奇美博物館</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">17:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">🌸 樂</span><strong>花市採購</strong></div></div>
+        <div class="tl-row"><div class="tl-time-col">18:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><strong>回家</strong></div></div>
+      </div>
+    </div>
+    <div class="day-content" id="day2">
+      <div class="day-header"><div class="day-badge" style="background:#FFE8D6">🍳</div><div><div class="day-subtitle">廚房挑戰日</div><div class="day-sub-desc">插花 × 水餃 × AI × 咖哩飯</div></div></div>
       <div class="tl">
         <div class="tl-row"><div class="tl-time-col">08:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>起床、盥洗</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">08:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>早餐</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">09:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🚶 行</span><strong>出發！菜市場採購</strong><small>採買咖哩食材 + 現成水餃</small></div></div>
+        <div class="tl-row"><div class="tl-time-col">09:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">🌸 樂</span><strong>插花體驗</strong><small>完成作品帶回家</small></div></div>
         <div class="tl-row"><div class="tl-time-col">11:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 食</span><strong>午餐：煮水餃！</strong><small>卡式爐 × IH爐 兩種爐具都會使用</small></div></div>
         <div class="tl-row"><div class="tl-time-col">12:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>開動！+ 午休</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">14:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🤖 育</span><strong>AI 大揭密！</strong><small>這張圖是真的嗎？AI 到底好不好？一起來玩問答！</small></div></div>
         <div class="tl-row"><div class="tl-time-col">16:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(200,184,122,.15);color:var(--gold)">🍱 食</span><strong>咖哩飯大作戰！備料開始</strong><small>洗菜 → 切菜 → 煮飯</small></div></div>
         <div class="tl-row"><div class="tl-time-col">17:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--gold)"></div></div><div class="tl-body"><strong>燉煮咖哩</strong></div></div>
         <div class="tl-row"><div class="tl-time-col">18:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>開動！→ 洗碗、清潔廚房</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">20:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(122,148,112,.15);color:var(--accent)">👕 衣</span><strong>洗衣達人訓練</strong><small>分辨深淺色 · 正確投放洗劑 · 手洗 · 晾曬</small></div></div>
         <div class="tl-row"><div class="tl-time-col">21:00</div><div class="tl-dot-col"><div class="dot" style="background:rgba(255,255,255,.1)"></div></div><div class="tl-body"><strong>洗澡、就寢</strong></div></div>
-      </div>
-    </div>
-
-    <!-- DAY 3 -->
-    <div class="day-content" id="day2">
-      <div class="day-header"><div class="day-badge" style="background:rgba(122,148,112,.15)">🏛️</div><div><div class="day-subtitle">生活收成日</div><div class="day-sub-desc">校外教學 × 快樂回家</div></div></div>
-      <div class="tl">
-        <div class="tl-row"><div class="tl-time-col">08:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--accent)"></div></div><div class="tl-body"><strong>起床、盥洗</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">08:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--hint)"></div></div><div class="tl-body"><strong>早餐</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">09:30</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><span class="tl-chip" style="background:rgba(184,92,56,.15);color:var(--warm)">🏛️ 行</span><strong>校外教學｜古埃及文物展</strong></div></div>
-        <div class="tl-row"><div class="tl-time-col">16:00</div><div class="tl-dot-col"><div class="dot" style="background:var(--warm)"></div></div><div class="tl-body"><strong>快樂回家！</strong></div></div>
       </div>
     </div>
   </div>
@@ -258,14 +270,88 @@ footer{background:var(--nav);color:rgba(255,255,255,.25);text-align:center;paddi
   </div>
 </section>
 
+
+<!-- PARENT NOTES -->
+<section class="section" id="parents" style="background:var(--cream);scroll-margin-top:56px">
+  <div style="max-width:640px;margin:0 auto">
+    <span class="s-label">重要資訊</span>
+    <h2 class="s-title">家長注意事項</h2>
+
+    <!-- 餐食安排 -->
+    <div class="pn-card">
+      <div class="pn-title">🍱 三日餐食安排</div>
+      <table class="meal-table">
+        <thead>
+          <tr><th></th><th>早餐</th><th>午餐</th><th>晚餐</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="day-col">第一天</td>
+            <td>自備</td>
+            <td>夏令營</td>
+            <td>不留宿者可接回自備</td>
+          </tr>
+          <tr>
+            <td class="day-col">第二天</td>
+            <td>夏令營<span class="meal-note">（不留宿者可自備）</span></td>
+            <td>夏令營</td>
+            <td>不留宿者可接回自備，與家人分享</td>
+          </tr>
+          <tr>
+            <td class="day-col">第三天</td>
+            <td>夏令營<span class="meal-note">（不留宿者可自備）</span></td>
+            <td>奇美博物館</td>
+            <td>自備</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pn-note">⚠️ 如有不吃的食物及會過敏者，務必提前告知</div>
+    </div>
+
+    <!-- 設備 -->
+    <div class="pn-card">
+      <div class="pn-title">💻 設備準備</div>
+      <div class="pn-text">請確認學員的平板或電腦可以使用 <strong>Claude</strong> 及 <strong>Gemini</strong><br>
+      家長可預先登入自己的帳號以供使用</div>
+    </div>
+
+    <!-- 心得上傳 -->
+    <div class="pn-card">
+      <div class="pn-title">📸 心得上傳 ＆ 家長觀看</div>
+      <div class="pn-text">活動中會教學員上傳照片與心得<br>
+      家長可使用學員密碼登入本網站「學員專區」觀看</div>
+    </div>
+
+    <!-- 費用 -->
+    <div class="pn-card">
+      <div class="pn-title">💰 費用說明</div>
+      <div class="pn-text">三日費用將於活動結束後收取<br>包含伙食費及材料費</div>
+    </div>
+
+    <!-- 學員準備物品勾選表 -->
+    <div class="pn-card">
+      <div class="pn-title">🎒 學員需準備物品</div>
+      <div class="checklist">
+        <label class="check-item"><input type="checkbox"><span>平板或筆電</span></label>
+        <label class="check-item"><input type="checkbox"><span>文具（筆記本、筆）</span></label>
+        <label class="check-item"><input type="checkbox"><span>水壺</span></label>
+        <label class="check-item"><input type="checkbox"><span>鍋子 ×1（外帶咖哩）＋ 樂扣 ×1（外帶白飯）</span></label>
+        <label class="check-item"><input type="checkbox"><span>換洗衣物 ×2天（住宿者）</span></label>
+      </div>
+      <div class="check-reset" onclick="resetChecklist()">重置清單</div>
+    </div>
+
+  </div>
+</section>
 <section class="cta-section">
   <h2 class="cta-title">學員需準備物品</h2>
   <ul class="prep-list">
     <li>平板或筆電</li>
     <li>文具</li>
     <li>水壺</li>
-    <li>樂扣 ×2（如需外帶咖哩＆白飯）</li>
+    <li>鍋子 ×1（外帶咖哩）＋ 樂扣 ×1（外帶白飯）</li>
     <li>換洗衣物 ×2天（住宿者）</li>
+    <li>包裝紙（如沒有可跳過）</li>
   </ul>
 </section>
 
@@ -441,6 +527,10 @@ function spSwitch(d) { currentDay = d; renderDayContent(); }
 function openLightbox(url) { document.getElementById('lightboxImg').src=url; document.getElementById('lightbox').classList.add('open'); }
 function closeLightbox() { document.getElementById('lightbox').classList.remove('open'); }
 document.getElementById('pwModal').addEventListener('click', function(e){ if(e.target===this) closeModal(); });
+
+function resetChecklist() {
+  document.querySelectorAll('.check-item input[type=checkbox]').forEach(cb => cb.checked = false);
+}
 </script>
 </body>
 </html>

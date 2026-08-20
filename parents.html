@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生活大冒險 2026｜家長注意事項</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F0EEE9;--bg2:#E4E0D8;--card:#D5D0C8;
+  --nav:#3D3B37;--text:#3D3B37;--sub:#8A8880;--hint:#B0A9A0;
+  --accent:#7A9470;--accent2:#5C7254;--warm:#B85C38;--gold:#C8B87A;--cream:#FAF8F4;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);font-family:"Noto Sans TC",sans-serif;color:var(--text);min-height:100svh}
+
+/* HERO */
+.hero{background:var(--nav);padding:60px 24px 52px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 30% 60%,rgba(122,148,112,.12) 0%,transparent 70%)}
+.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 75% 30%,rgba(200,184,122,.08) 0%,transparent 70%)}
+.grid-bg{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:40px 40px}
+.hero-camp{position:relative;font-size:.78rem;letter-spacing:.22em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:16px}
+.hero-title{position:relative;font-family:"Zen Kaku Gothic New",sans-serif;font-size:clamp(2.2rem,9vw,4rem);color:#fff;font-weight:700;line-height:1.05;margin-bottom:12px}
+.hero-title .accent{color:var(--gold)}
+.hero-sub{position:relative;font-size:.88rem;color:rgba(255,255,255,.4);letter-spacing:.06em}
+.hero-date{position:relative;display:inline-block;margin-top:16px;padding:5px 16px;border:1px solid rgba(255,255,255,.15);border-radius:3px;font-size:.75rem;color:rgba(255,255,255,.5);letter-spacing:.14em}
+
+/* BODY */
+.body{max-width:640px;margin:0 auto;padding:36px 20px 60px}
+
+/* CARDS */
+.pn-card{background:var(--cream);border:1px solid var(--card);border-radius:10px;padding:24px 20px;margin-bottom:16px;position:relative;overflow:hidden}
+.pn-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--accent)}
+.pn-card.warm::before{background:var(--warm)}
+.pn-card.gold::before{background:var(--gold)}
+.pn-card.dark{background:var(--nav)}
+.pn-card.dark::before{background:var(--gold)}
+
+.pn-label{font-size:.65rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:6px}
+.pn-card.warm .pn-label{color:var(--warm)}
+.pn-card.gold .pn-label{color:#8a6e00}
+.pn-card.dark .pn-label{color:var(--gold);opacity:.7}
+.pn-title{font-family:"Zen Kaku Gothic New",sans-serif;font-size:1.05rem;font-weight:700;color:var(--nav);margin-bottom:14px}
+.pn-card.dark .pn-title{color:#fff}
+
+/* MEAL TABLE */
+.meal-table{width:100%;border-collapse:collapse;font-size:.82rem;margin-top:4px}
+.meal-table th{background:var(--nav);color:rgba(255,255,255,.75);padding:8px 10px;text-align:center;font-weight:700;font-size:.72rem;letter-spacing:.08em}
+.meal-table th:first-child{width:52px}
+.meal-table td{padding:10px;border-bottom:1px solid var(--bg2);color:var(--text);vertical-align:top;line-height:1.65;font-size:.82rem}
+.meal-table tr:last-child td{border-bottom:none}
+.meal-table .day-col{font-weight:700;color:var(--accent);white-space:nowrap;text-align:center}
+.meal-note{display:block;font-size:.7rem;color:var(--hint);margin-top:3px}
+.warn-box{margin-top:14px;background:#fff8f5;border:1px solid #f0d5cc;border-radius:6px;padding:10px 14px;font-size:.8rem;color:var(--warm);line-height:1.7}
+
+/* INFO */
+.info-text{font-size:.88rem;color:var(--sub);line-height:1.9}
+.info-text strong{color:var(--text)}
+
+/* PASSWORD GRID */
+.pw-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.pw-card{background:#fff;border:1px solid var(--card);border-radius:8px;padding:12px 14px;display:flex;align-items:center;gap:10px}
+.pw-icon{font-size:1.4rem}
+.pw-name{font-family:"Zen Kaku Gothic New",sans-serif;font-size:.95rem;font-weight:700;color:var(--nav)}
+.pw-code{font-size:.75rem;color:var(--hint);margin-top:2px;letter-spacing:.06em}
+
+/* CHECKLIST */
+.checklist{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.check-item{display:flex;align-items:center;gap:12px;cursor:pointer;padding:10px 14px;border-radius:6px;border:1.5px solid var(--card);background:#fff;transition:all .2s}
+.check-item:hover{border-color:var(--accent)}
+.check-item input[type=checkbox]{width:18px;height:18px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.check-item span{font-size:.88rem;color:var(--text);line-height:1.4}
+.check-item:has(input:checked){background:#f0f7f0;border-color:var(--accent)}
+.check-item:has(input:checked) span{color:var(--accent);text-decoration:line-through;opacity:.7}
+.check-reset{text-align:right;font-size:.75rem;color:var(--hint);margin-top:10px;cursor:pointer;transition:color .2s}
+.check-reset:hover{color:var(--warm)}
+
+/* LINE BTN */
+.line-btn{display:block;text-align:center;margin-top:28px}
+.line-btn a{display:inline-flex;align-items:center;gap:8px;background:var(--nav);color:var(--gold);font-family:"Zen Kaku Gothic New",sans-serif;font-size:1rem;font-weight:700;padding:14px 36px;border-radius:4px;text-decoration:none;letter-spacing:.06em;transition:opacity .2s}
+.line-btn a:hover{opacity:.82}
+
+footer{background:var(--nav);color:rgba(255,255,255,.2);text-align:center;padding:20px;font-size:.75rem;letter-spacing:.06em;border-top:1px solid rgba(255,255,255,.05)}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="grid-bg"></div>
+  <div class="hero-camp">生活大冒險 夏令營</div>
+  <h1 class="hero-title">家長<span class="accent">注意事項</span></h1>
+  <p class="hero-sub">請詳閱以下資訊，讓孩子有個順利的冒險旅程</p>
+  <div class="hero-date">2026 / 8.17 – 8.19</div>
+</div>
+
+<div class="body">
+
+  <!-- 餐食安排 -->
+  <div class="pn-card warm">
+    <span class="pn-label">餐食安排</span>
+    <div class="pn-title">三日餐食說明</div>
+    <table class="meal-table">
+      <thead>
+        <tr><th></th><th>早餐</th><th>午餐</th><th>晚餐</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="day-col">Day 1</td>
+          <td>自備</td>
+          <td>奇美博物館</td>
+          <td>不留宿者可接回</td>
+        </tr>
+        <tr>
+          <td class="day-col">Day 2</td>
+          <td>夏令營<span class="meal-note">不留宿者可自備</span></td>
+          <td>夏令營</td>
+          <td>不留宿者可接回</td>
+        </tr>
+        <tr>
+          <td class="day-col">Day 3</td>
+          <td>夏令營<span class="meal-note">不留宿者可自備</span></td>
+          <td>夏令營</td>
+          <td>不留宿者可接回<span class="meal-note">有煮咖哩飯</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="warn-box">⚠️ 如有不吃的食物及會過敏者，務必提前告知</div>
+  </div>
+
+  <!-- 設備準備 -->
+  <div class="pn-card">
+    <span class="pn-label">設備準備</span>
+    <div class="pn-title">平板或電腦</div>
+    <div class="info-text">請確認學員設備可以使用 <strong>Claude</strong> 及 <strong>Gemini</strong><br>家長可預先登入自己的帳號以供使用</div>
+  </div>
+
+  <!-- 心得上傳 -->
+  <div class="pn-card">
+    <span class="pn-label">心得分享</span>
+    <div class="pn-title">照片 ＆ 心得上傳</div>
+    <div class="info-text">活動中會教學員上傳照片與每日心得<br>家長可使用學員專屬密碼登入網站「學員專區」隨時觀看<br>密碼將另行通知</div>
+  </div>
+
+  <!-- 費用 -->
+  <div class="pn-card gold">
+    <span class="pn-label">費用說明</span>
+    <div class="pn-title">三日費用</div>
+    <div class="info-text">費用將於<strong>活動結束後</strong>收取<br>包含伙食費及材料費</div>
+  </div>
+
+  <!-- 準備物品勾選表 -->
+  <div class="pn-card dark">
+    <span class="pn-label">學員準備物品</span>
+    <div class="pn-title">出發前請確認清單</div>
+    <div class="checklist">
+      <label class="check-item"><input type="checkbox"><span>平板或筆電</span></label>
+      <label class="check-item"><input type="checkbox"><span>文具（筆記本、筆）</span></label>
+      <label class="check-item"><input type="checkbox"><span>水壺</span></label>
+      <label class="check-item"><input type="checkbox"><span>鍋子 ×1（外帶咖哩）＋ 樂扣 ×1（外帶白飯）</span></label>
+      <label class="check-item"><input type="checkbox"><span>換洗衣物 ×2天（住宿者）</span></label>
+      <label class="check-item"><input type="checkbox"><span>包裝紙（如沒有可跳過）</span></label>
+      <label class="check-item"><input type="checkbox"><span>小錢包</span></label>
+    </div>
+    <div class="check-reset" onclick="document.querySelectorAll('.check-item input').forEach(c=>c.checked=false)">重置清單</div>
+  </div>
+
+  <!-- LINE 聯絡 -->
+  <div class="line-btn">
+    <a href="https://line.me/ti/p/l3cDsDxqig" target="_blank">有任何問題 LINE 聯絡 →</a>
+  </div>
+
+</div>
+
+<footer>© 2026 生活大冒險夏令營 &nbsp;·&nbsp; 食衣住行育樂，全都學</footer>
+
+</body>
+</html>
